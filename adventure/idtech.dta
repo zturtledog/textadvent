@@ -1,0 +1,311 @@
+#settings
+    slowtext:true
+    textspeed:30    
+#end
+
+#advent
+    #prerun
+        print:(?): do you wish to participate in a spectacular adventure of the highest magnitude?
+        var:$haspider,false
+        var:$hasward,false
+    #end
+
+    type:selection
+    labels:yes:no
+
+    #0
+        type:open
+
+        #prerun
+            print:(?): what is your name great adventurer?
+        #end
+
+        #continue
+            #prerun
+                print:($name): ughhh... what was that, a bad dream?
+                print:Choose an action: 
+            #end
+
+            type:selection
+            labels:look around:cautiously say something:lie back down
+
+            #1
+                type:selection
+                labels:explore:look through pockets
+
+                #0
+                    #prerun
+                        print:(???): ROAAARRR
+                        print:A thunderous growl fills your ears
+                        print:(sys): now would be a good time to save.
+                    #end
+
+                    type:selection
+                    labels:fight:run:hide
+
+                    #1
+                        #prerun
+                            print:Do you enter the store?
+                        #end
+
+                        type:selection
+                        labels:go in:avoid
+
+                        #0
+                            #prerun
+                                print:(Door): clnnk
+                                print:The door locks behind you, you become trapped.
+                            #end
+                            
+                            type:selection
+                            labels:look for a way out:eat the dusty old food sitting idle on the shelfs
+
+                            #0
+                                ~how to escape a locked convinence store and other fun puzzles
+
+                                #prerun
+                                    print:You turn around to continue on when you see that the shop has dissapeared, replaced with a hive dripping with blood
+                                    print:Spiders swarm out of the hive.
+                                #end
+
+                                type:selection
+                                labels:run:fight
+
+                                #pr0
+                                    var:$haspider,true
+                                    path:advent:0:continue:1:0:1:1:
+                                #end
+
+                                #pr1
+                                    print:You attempt to fight the spiders.                                    /nunsuprisingly this has no effect 
+                                    end:4                                         
+                                #end
+                            #end
+
+                            #pr0
+                                print:You look for a way out, investigating the surounding shelves for a key.
+                                print:When you find none you thrust yourself into the door, smashing through the window.
+                            #end
+
+                            #pr1
+                                print:ignoring your better judement, you snatch a bag of increadibly old chips and scarf them down.
+                                print:you fall to the floor in pain, your stomach on fire.
+                                end:3
+                            #end
+                        #end
+
+                        #1
+                            #prerun
+                                print:As you run from the spiders you are too distracted to notice a masive hole in the ground.
+                                print:You fall in the hole.
+                            #end
+
+                            type:selection
+                            labels:try to climb out:explore
+
+                            #1
+                                #prerun
+                                    print:As you stray deeper and deeper into the mouth of the cave, a intense wave of searing pain crashes over you.
+                                    print:You pass out.                                                                                   /n
+                                    print:As you wake from your sleep, you find yourself in a new location, a massive white room.
+                                    print:Or at least you think its a room, it's walls streach on seeminly forever.
+                                    print:A voice echos around you:
+                                    print:(??): What are you doing here?!                                                      /n
+                                    print:You pass out.
+                                    print:When you wake, you find yourself back in the cave with an intense headache.
+                                #end 
+
+                                type:selsection
+                                labels:look around:stray deeper
+
+                                #0
+                                    #prerun
+                                        print:You look around the cave, in the corner is a skeleton in a state that can only be discribed as half eaten.
+                                        print:In the hand of the skeleton is a large sword.
+                                        print:Do you take the sword?
+                                    #end
+
+                                    type:selection
+                                    labels:leave the sword:obtain the sword
+
+                                    #1
+                                        #prerun
+                                            print:You pick up the weapon, admiring the reflective surface of the blade.
+                                            print:What would you like to call the weapon?
+                                        #end
+
+                                        type:open
+
+                                        #postrun
+                                            var:$swordname,$ans
+                                            print:Ah, $swordname, a grandiose name for a magnificent longsword.
+                                            print:(sys): now would be a good time to save!
+                                            path:advent:0:continue:1:0:1:1:1:1:
+                                        #end
+                                    #end
+
+                                    #pr0
+                                        print:You leave the sword.
+                                        print:($name): Whatever killed them... that sword didn't help. perhaps the sword caused this.
+                                        print:Your sanity goes down.
+                                        dec:$sanity,1
+                                        path:advent:0:continue:1:0:1:1:1:1:
+                                    #end
+                                #end
+
+                                #1
+                                    #prerun
+                                        print:As you stray deeper into the depths of the cave, you feel uneasy and strangely uncomfortable.
+                                        print:After what seems like forever, you see beams of light drift from the exit of the cave.
+                                    #end
+
+                                    type:selection
+                                    labels:leave:stay
+
+                                    ~don't get eaten byu the shadow beast
+
+                                    #pr0
+                                        print:You leave the cave.
+                                        path:advent:0:continue:1:0:2:1:
+                                    #end
+
+                                    #pr1
+                                        print:You choose to stay in the cave, a sense fo calm washes over you as you wander back into the depths.
+                                        end:5
+                                    #end
+                                #end
+                            #end
+
+                            #pr0
+                                print:You attempt to escape your new prison when you hear the spiders comming.
+                                print:You duck under an overhang of roots, hoping the spiders don't notice you.                                                     /nThe spiders pass, but you figure they will be back later.
+                                print:/n[-->back                                     /n
+                                path:$cpath
+                            #end
+                        #end
+
+                        #pr0
+                            print:You enter the store not giving it a second thought.
+                        #end
+
+                        #pr1
+                            print:You think better of entering some random convinience store and go around.
+                            print:As you walk around the store you see that behind its facade, the store is actualy a horrid pile of flesh and spiders.
+                            print:You start running
+                        #end
+                    #end
+
+                    #2
+                        #prerun
+                            print:You quickly duck into the nearby bushes.
+                            print:You watch as the thing crawls out from the darkness into were you were just moments before.
+                            print:You manage to get a good look at the creature.
+                            print:The beast is tall and wide with enourmus dark yellow teeth dripping with blood.
+                            print:It doesn't seem to notice you hidding in the bushes.
+                            print:After you're sure that the thing has passed, you exit your hiding spot and run out of the forest.
+                        #end
+
+                        type:selection
+                        labels:stay:enter the meddow
+
+                        #1
+                            #prerun
+                                print:A slight breeze echos through the vast plain that you find yourself in.
+                            #end
+
+                            type:selection
+                            labels:investigate:shout
+
+                            #pr0
+                                print:In the middle of the clearing, there is a small portal.
+                                print:You see your room on the other side.
+                                print:You enter the portal.
+                                end:8
+                            #end
+
+                            #pr1
+                                print:You shout:
+                                print:($name): HELLO! IS ANYBODY THERE??
+                                print:the only answer you recieve is a deep growl behind you.
+                                end:7
+                            #end
+                        #end
+
+                        #pr0
+                            print:You go back into the forest.
+                            end:6
+                        #end
+                    #end
+
+                    #pr0
+                        print:You turn around to find a massive shadow looming behind you, you give it a punch./n|/nIt goes right through the beast                                             /n|
+                        print:You turn to flee, but it is already to late.
+                        end:2
+                    #end
+
+                    #pr1
+                        print:You run through the woods, faster then you ever have before.
+                        print:Eventualy you reach a clearing in the woods, the moonlight shining brightly down on a convinence shop
+                    #end
+                #end
+
+                #pr0
+                    print:You look around your area, there is nothing but trees and shubbery.
+                #end
+
+                #pr1
+                    print:You look through the raggedy pockets of your heavily worn pants, inside you find nothing.
+                    path:$cpath
+                #end
+            #end
+
+            #pr0
+                print:You look around your dark suroundings                /nyou're in a forest, dark trees are all around you,                 /nall of them black as pitch.
+                print:/n[-->back                                     /n
+                path:$cpath
+            #end
+
+            #pr1
+                print:you cautiously speak into the dark,
+                print:($name): What's going on, Where am I?
+                print:A strong wind blows past. 
+                print:There is of course, no response, why would there be, you're alone out here./n|/nYou swear you hear wispers./n|
+                print:Perhaps you're not as alone as you once thought.
+                print:you push the thought out of you head, as you try to remember how you got here
+            #end
+
+            #pr2
+                print:As you lie down you feel a sense of euphoria wash over you as you slip into a deep coma.
+                end:1
+            #end
+        #end
+
+        #postrun
+            var:$name,$ans
+            print:(?): excelent, now we must begin $name!                                           /n
+            print:/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n
+        #end
+    #end
+
+    #pr0
+        print:(?): Wonderfull! let us continue on a marvolus journey! (remember to save __often__ with: "$save")
+    #end
+
+    #pr1
+        print:(?): that is disapointing to hear, come back when you are ready for adventure
+        end:0
+    #end
+#end
+
+#endings
+    0:You Lost. You Cowardly Refuted The Oportunity For Adventure.
+    1:You Lost. You lay back down in your bed of leaves and let the darkness consume you.
+    2:You Lost. You are torn to sheds and consumed, you were never much of a fighter anyway.
+    3:You Lost. A massive spider crawls out of your mouth as you lay there dead. Perhaps you shoulden't have eaten that food.
+    4:You Lost. Your futile attempt to fight a horde of spiders fails, and you become food for the hive.
+    5:You Lost. A beast lurks through the depths of the cave, stalking you as you walk./n   when it reveals itself, you embrace the being, disolving into the creature as if you were always ment to be with it, be a part of it.
+    6:You Lost. A sense of belonging washes over you as you hobble in a trance like state, crying as you disolve into the creature lurking in the shadows. 
+    7:You Lost. You turn and see the beast you narrowly escaped earlier, grinning teeth tear into you. You are ripped to shreads.
+
+    8:You Win. You survived the forest(for now) and escaped into the real world.
+#end

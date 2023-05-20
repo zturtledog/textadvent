@@ -50,8 +50,10 @@ public class gme {
             localvars.put(nei.key, nei.val);
         }
 
-        int endl = Integer.parseInt(datastate.get("endings:length"));
+        // int endl = Integer.parseInt(datastate.get("endings:length"));
+        int endl = datastate.getpathraw("endings").blk.size();
         for (int i = 0; i < endl; i++) {
+            if (datastate.exists("endings:"+i))
             endings.add(datastate.get("endings:"+i));
         }
 

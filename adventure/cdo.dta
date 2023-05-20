@@ -5,7 +5,7 @@
 
 #advent
     #prerun
-        print:prerun is code that runs before the question /@c;/grey/runs/*r/
+        print:start
     #end
 
     ~can be selection or open
@@ -15,20 +15,28 @@
     labels:yes:no
 
     #0
-        ~another question
-    #end
+        #prerun
+            print:Wonderfull, lets get started                                                    /*n/
+            print:/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/*n/
+        #end
 
-    #pr0
-        ~runs after you select the answer
+        type:selection
+        labels:look around:do nothing
+
+        #0
+            ~ //
+        #end
+
+        #1
+            ~ //
+        #end
     #end
 
     #pr1
-        print:I must congratulate you on your losses.
         end:0
     #end
 #end
 
 #endings
-    length:1
-    0:You Lost. You Wisely Refused to Start the Cycle.
+    0:/@c;/cyan/ending [0/*slsh/?]:/*r/ why even start, things can only go downhill from here.
 #end

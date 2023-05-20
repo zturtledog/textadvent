@@ -42,20 +42,20 @@ public class datalng {
                 if (lines.get(i).charAt(0) == '#') {
                     if (lines.get(i).compareTo("#end")==0) {//a tail
                         // System.out.println("tail");
-                        clli.add(new cllsific(lines.get(i), "tail"));
+                        clli.add(new cllsific(lines.get(i), "tail", i));
                     }else{//a normal head
                         // System.out.println("head: '"+lines.get(i)+"'");
-                        clli.add(new cllsific(lines.get(i), "head"));
+                        clli.add(new cllsific(lines.get(i), "head", i));
                     }
                 }else if (lines.get(i).charAt(0) == '~') {
                     //this is a comment
                 } else if (lines.get(i).charAt(0) == '.') {//a varible
                     // System.out.println("varible");
                     String[] vardata = lines.get(i).split(" ", 3);
-                    varx.add(new cllsific(vardata[0].split(".",2)[1], vardata[2]));
+                    varx.add(new cllsific(vardata[0].split(".",2)[1], vardata[2],i));
                 } else{//a key
                     // System.out.println("key");
-                    clli.add(new cllsific(lines.get(i), "key"));
+                    clli.add(new cllsific(lines.get(i), "key",i));
                 }
             }    
         }
@@ -67,6 +67,7 @@ public class datalng {
         ArrayList<nxt> end = new ArrayList<nxt>();
         int depth = 0;
         String head = "";
+        int headline = 0;
         boolean parsing = false;
         for (int i = 0; i < clis.size(); i++) {
             if (!clis.get(i).type.equals("key")) {
@@ -76,7 +77,7 @@ public class datalng {
                     if (parsing) {
                         if (depth == 0) {
                             parsing = false;
-                            end.add(new nxt(head,block(nextac)));
+                            end.add((new nxt(head,block(nextac))).lne(headline));//todo:lle
                             nextac.clear();
                         }else{
                             nextac.add(clis.get(i));
@@ -88,6 +89,7 @@ public class datalng {
                         nextac.add(clis.get(i));
                     }else{
                         head = clis.get(i).value.replaceFirst("#", "");
+                        headline = clis.get(i).line;
                     }
                     parsing = true;
                 }
@@ -96,7 +98,17 @@ public class datalng {
                     nextac.add(clis.get(i));
                 }else{
                     String[] srdata = clis.get(i).value.split(":",2);
-                    end.add(new nxt(srdata[0], variate(srdata[1])));
+
+                    if (srdata.length<2) {
+                        System.out.println(prettyprint.assemble("/@c;/red/invalid keypair/*r/*n/  line:"+clis.get(i).line));
+                        System.exit(0);
+                    }
+                    else
+                    // if (srdata.length > 1) {
+                        end.add((new nxt(srdata[0], variate(srdata[1]))).lne(clis.get(i).line));
+                    // } else {
+                        // System.out.println("invalid keypair: "+clis.get(i).line);
+                    // }
                 }
             }
         }
@@ -131,7 +143,7 @@ public class datalng {
 
     public nxt getpathraw(String path) {
         String[] pathdat = path.split(":");
-        nxt temp = new nxt("hi", internal);
+        nxt temp = new nxt("hi", internal);//fine with line 0
 
         for (int i = 0; i < pathdat.length; i++) {
             temp = findinarraylist(pathdat[i],temp.blk);
@@ -146,7 +158,7 @@ public class datalng {
 
     public boolean exists(String path) {
         String[] pathdat = path.split(":");
-        nxt temp = new nxt("hi", internal);
+        nxt temp = new nxt("hi", internal);//fine with line 0
 
         for (int i = 0; i < pathdat.length; i++) {
             for (nxt nei : temp.blk) {
@@ -181,9 +193,16 @@ public class datalng {
         public String val = "";
         public ArrayList<nxt> blk = new ArrayList<nxt>();
 
+        public int line = -1;
+
         public nxt(String key, String val) {
             this.key = key;
             this.val = val;
+        }
+
+        public nxt lne(int lle) {
+            line = lle;
+            return this;
         }
 
         public nxt(String key, ArrayList<nxt> block) {
@@ -204,9 +223,17 @@ public class datalng {
         public String value;
         public String type;
 
+        public int line = -1;
+
         public cllsific(String val, String typ) {
             value = val;
             type = typ;
+        }
+
+        public cllsific(String val, String typ, int lne) {
+            value = val;
+            type = typ;
+            line = lne;
         }
 
         public String tostring() {

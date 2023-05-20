@@ -63,8 +63,17 @@ public class prettyprint {
             else if (data[i].equals("*r")) {
                 text+=reset;
             }
-            else if (data[i].equals("slsh")) {
+            else if (data[i].equals("*slash")) {
                 text+="/";
+            }
+            else if (data[i].equals("*star")) {
+                text+="*";
+            }
+            else if (data[i].equals("*at")) {
+                text+="@";
+            }
+            else if (data[i].equals("*arrow")) {
+                text+=">";
             }
             else if (data[i].equals(">b")) {text += bold;}
             else if (data[i].equals(">i")) {text += italic;}
@@ -111,8 +120,17 @@ public class prettyprint {
             if (data[i].equals("*n")) {
                 text+="\n";
             }
-            else if (data[i].equals("slsh")) {
+            else if (data[i].equals("*slash")) {
                 text+="/";
+            }
+            else if (data[i].equals("*star")) {
+                text+="*";
+            }
+            else if (data[i].equals("*at")) {
+                text+="@";
+            }
+            else if (data[i].equals("*arrow")) {
+                text+=">";
             }
             else if (
                 data[i].equals("*r")||

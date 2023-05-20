@@ -1,0 +1,25 @@
+{
+  "name": "dta-syntax",
+  "displayName": "dta syntax",
+  "description": "a syntax hilighter for dta",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "dta",
+      "aliases": ["dta", "dta"],
+      "extensions": [".dta"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "dta",
+      "scopeName": "source.dta",
+      "path": "./syntaxes/dta.tmLanguage.json"
+    }]
+  }
+}

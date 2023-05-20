@@ -1,0 +1,1 @@
+java -cp advent_v2.jar jvs %1 %2

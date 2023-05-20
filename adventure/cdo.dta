@@ -1,0 +1,34 @@
+#settings
+    slowtext:true
+    textspeed:30    
+#end
+
+#advent
+    #prerun
+        print:prerun is code that runs before the question /@c;/grey/runs/*r/
+    #end
+
+    ~can be selection or open
+    ~selection has the labels tag which labels the indecies of the actions (defined by #[idx] #end and #pr[idx] #end)
+    ~open has the #continue #end block set the $ans var 
+    type:selection
+    labels:yes:no
+
+    #0
+        ~another question
+    #end
+
+    #pr0
+        ~runs after you select the answer
+    #end
+
+    #pr1
+        print:I must congratulate you on your losses.
+        end:0
+    #end
+#end
+
+#endings
+    length:1
+    0:You Lost. You Wisely Refused to Start the Cycle.
+#end

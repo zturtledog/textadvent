@@ -1,0 +1,58 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "dta",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#vars"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#keys"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name":"entity.name.class",
+				"match": "#.*"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.dta",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.dta",
+					"match": "\\\\."
+				}
+			]
+		},
+		"comments":{
+			"patterns": [
+				{
+					"name":"comment.line",
+					"match": "~.*"
+				}
+			]
+		},
+		"keys":{
+			"patterns": [{
+				"name":"keyword.operator.new",
+				"match": "[a-zA-Z0-9_]+:"
+			}]
+		},
+		"vars":{
+			"patterns": [{
+				"name":"constant.numeric",
+				"match": "^\\.[a-zA-Z0-9_]+ ?=.+"
+			}]
+		}
+	},
+	"scopeName": "source.dta"
+}

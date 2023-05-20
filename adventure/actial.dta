@@ -1,0 +1,48 @@
+#settings
+    name:the forest
+#end
+
+#advent
+    #prerun
+        print:(?): do you wish to participate in a spectacular adventure of the highest magnitude?
+    #end
+
+    type:selection
+    labels:yes:no
+
+    #0
+        type:open
+
+        #prerun
+            print:(?): what is your name great adventurer?
+        #end
+
+        #continue
+            #prerun
+                print:/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n
+            #end
+
+            type:selection
+            labels:copt1:copt2:copt3
+        #end
+
+        #postrun
+            var:$name,$ans
+            print:(?): excelent, now we must begin $name! 
+        #end
+    #end
+
+    #pr0
+        print:(?): Wonderfull! let us continue on a marvolus journey!/n
+    #end
+
+    #pr1
+        print:(?): that is disapointing to hear, come back when you are ready for adventure
+        end:0
+    #end
+#end
+
+#endings
+    length:1
+    0:You Lost. You Cowardly Refuted The Oportunity For Adventure.
+#end

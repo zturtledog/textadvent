@@ -1,0 +1,32 @@
+.cyclepath = advent:0:
+
+#settings
+    name:May this perfect cycle never end
+#end
+
+#advent
+    #prerun
+        print:do you wish to start the cycle?
+    #end
+
+    type:selection
+    labels:yes:no
+
+    #0
+        ~TODO:the cycle
+    #end
+
+    #pr0
+        print:Wonderfull! Let us begin!/n
+    #end
+
+    #pr1
+        print:I must congratulate you on your losses.
+        end:0
+    #end
+#end
+
+#endings
+    length:1
+    0:You Lost. You Wisely Refused to Start the Cycle.
+#end
